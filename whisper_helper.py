@@ -104,7 +104,10 @@ if os.path.exists(destination_folder_path) == False:
 list_files_scandir(source_folder_path)
 stats_file = destination_folder_path + "batch_job.txt"
 
+int_count = 0
 for str_file in full_file_list:
+    int_count+=1
+    print("Processing file " + str(int_count) + " of " + str(len(full_file_list)) + ": " + getfilename(str_file))
     start_time = time.time()
     
     #Transcribe the file 
