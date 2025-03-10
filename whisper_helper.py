@@ -134,5 +134,7 @@ for str_file in full_file_list:
     
     #print the transcribed file
     with open(transcribed_file, 'x', encoding="utf-8") as f:
-        f.write(result['text'].encode("utf-8"))
+        encoded_line = result['text'].encode("utf-8", errors="ignore")
+        decoded_line = encoded_line.decode(encoding="utf-8")
+        f.write(decoded_line)
 
