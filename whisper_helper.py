@@ -10,11 +10,11 @@ from pathlib import Path
 
 full_file_list = []
 
-def list_files_scandir(path='.', str_exclude='pdf'):
+def list_files_scandir(path='.', str_include=['mp3','mp4','pmweg','m4a','wav','webm']):
     with os.scandir(path) as entries:
         for entry in entries:
             if entry.is_file():
-                if entry.path.lower().endswith(str_exclude) == False:
+                if entry.path.lower().endswith(tuple(str_include)) == True:
                     full_file_list.insert(-1, entry.path)
             elif entry.is_dir():
                 list_files_scandir(entry.path)
@@ -125,7 +125,7 @@ for str_file in full_file_list:
 
     #append to the results file
     with open(stats_file, "a") as f:
-        f.writeline("filename: " + str_file + "\t" + "Machine: " + computer_name + "\t" + "user: " + current_user + "\t" + "Word Count: " + str(len(result["text"])) + "\t" + "Execution (in secs): "  + str(elapsed) + "\t" + "model used: " + str_model_type)
+        f.writeline("filename: " + str_file + "\t" + "Machine: " + computer_name + "\t" + "user: " + current_user + "\t" + "Word Count: " + str(len(result["text"])) + "\t" + "Execution (in secs): "  + str(elapsed) + "\t" + "model used: " + str_model_type + "\n")
     
     #print the transcribed file
     with open(transcribed_file, 'x') as f:
