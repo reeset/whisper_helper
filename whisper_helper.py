@@ -128,7 +128,7 @@ for str_file in full_file_list:
 
     #append to the results file
     with open(stats_file, "a") as f:
-        f.writeline("filename: " + str_file + "\t" + "Machine: " + computer_name + "\t" + "user: " + current_user + "\t" + "Word Count: " + str(len(result["text"])) + "\t" + "Execution (in secs): "  + str(elapsed) + "\t" + "model used: " + str_model_type + "\n")
+        f.write("filename: " + str_file + "\t" + "Machine: " + computer_name + "\t" + "user: " + current_user + "\t" + "Word Count: " + str(len(result["text"])) + "\t" + "Execution (in secs): "  + str(elapsed) + "\t" + "model used: " + str_model_type + "\n")
     
     #print the transcribed file
     with open(transcribed_file, 'x') as f:
