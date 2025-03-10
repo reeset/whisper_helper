@@ -6,6 +6,8 @@ import whisper
 from collections import Counter
 import pprint
 from pathlib import Path
+import warnings
+warnings.filterwarnings("ignore")
 
 
 full_file_list = []
@@ -120,7 +122,7 @@ for str_file in full_file_list:
     cleanfile(output_file)
     cleanfile(transcribed_file)
     
-    with open(output_file, 'x') as f:
+    with open(output_file, 'x', encoding="utf-8") as f:
         pprint.pprint(result, f)
 
     #print(result["text"])
@@ -131,6 +133,6 @@ for str_file in full_file_list:
         f.write("filename: " + str_file + "\t" + "Machine: " + computer_name + "\t" + "user: " + current_user + "\t" + "Word Count: " + str(len(result["text"])) + "\t" + "Execution (in secs): "  + str(elapsed) + "\t" + "model used: " + str_model_type + "\n")
     
     #print the transcribed file
-    with open(transcribed_file, 'x') as f:
-        f.write(result['text'])
+    with open(transcribed_file, 'x', encoding="utf-8") as f:
+        f.write(result['text'].encode("utf-8"))
 
