@@ -113,7 +113,7 @@ for str_file in full_file_list:
     start_time = time.time()
     
     #Transcribe the file 
-    result = model.transcribe(str_file)
+    result = model.transcribe(str_file, language='en', verbose=False)
     
     #output file
     output_file = destination_folder_path + getfilename(str_file) + ".decode_optons.txt"
@@ -131,6 +131,14 @@ for str_file in full_file_list:
     #append to the results file
     with open(stats_file, "a") as f:
         f.write("filename: " + str_file + "\t" + "Machine: " + computer_name + "\t" + "user: " + current_user + "\t" + "Word Count: " + str(len(result["text"])) + "\t" + "Execution (in secs): "  + str(elapsed) + "\t" + "model used: " + str_model_type + "\n")
+    
+    output_ext = "txt"
+    if str_file.lower().endswith('.mp4'):
+        output_ext = "vtt"
+    
+
+    output_writer = whisper.utils.get_writer(output_ext, destination_folder_path )
+    output_writer(result, getfilename(str_file) + "." + output_ext)
     
     #print the transcribed file
     with open(transcribed_file, 'x', encoding="utf-8") as f:
